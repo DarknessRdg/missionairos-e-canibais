@@ -172,6 +172,14 @@ describe('Pode executar ação: UM_CANIBAL_UM_MISSIONARIO', () => {
     })
 })
 
+describe('Pode executar ação: NAO_EXISTE', () => {
+    it('não deve poder executar ação que não existe', () => {
+        const margem = new Margem({ canibais: 1, missionarios: 2 });
+
+        expect(margem.pode_executar_acao('NAO_EXISTE')).toBe(false);
+    })
+})
+
 describe('Está vazia', () => {
     it ('deve estar vazia se não houver canibal e missionario', () => {
         const margem = new Margem({ canibais: 0, missionarios: 0 });
