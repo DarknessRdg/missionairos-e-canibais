@@ -1,4 +1,3 @@
-import '../constants/acoes';
 import acoes from '../constants/acoes';
 
 
