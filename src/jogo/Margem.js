@@ -1,6 +1,3 @@
-import acoes from '../constants/acoes';
-
-
 class Margem {
     constructor({ canibais, missionarios }) {
         this.canibais = canibais;
@@ -8,40 +5,23 @@ class Margem {
     }
 
     pode_executar_acao(acao) {
-        let canibais_restantes = this.canibais;
-        let missioanrios_restantes = this.missionarios;
+        const proximo_estado = this._proximo_estado_dada_acao(acao);
 
-        switch (acao) {
-            case acoes.UM_CANIBAL:
-                canibais_restantes--;
-                break;
-            case acoes.UM_MISSIONARIO:
-                missioanrios_restantes--;
-                break;
-            case acoes.UM_CANIBAL_UM_MISSIONARIO:
-                missioanrios_restantes --;
-                canibais_restantes --;
-                break;
-            case acoes.DOIS_CANIBAIS:
-                canibais_restantes -= 2;
-                break;
-            case acoes.DOIS_MISSIONARIOS:
-                missioanrios_restantes -= 2;
-                break;
-            default:
-                missioanrios_restantes = -1;
-                canibais_restantes = -1;
-                break;
-        };
-
-        const missionarios_sobrevivem = missioanrios_restantes >= canibais_restantes;
-        const quantidade_negativa = missioanrios_restantes < 0 || canibais_restantes < 0;
+        const missionarios_sobrevivem = proximo_estado.missioanrios >= proximo_estado.canibais;
+        const quantidade_negativa = proximo_estado.missioanrios < 0 || proximo_estado.canibais < 0;
 
         return missionarios_sobrevivem && !quantidade_negativa;
     }
 
     esta_vazia() {
         return this.canibais === 0 && this.missionarios === 0;
+    }
+
+    _proximo_estado_dada_acao(acao) {
+        return {
+            canibais: this.canibais - acao.qnt_canibal, 
+            missioanrios: this.missionarios - acao.qnt_missioanario
+        };
     }
 };
 
