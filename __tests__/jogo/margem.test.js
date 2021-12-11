@@ -171,3 +171,24 @@ describe('Pode executar ação: UM_CANIBAL_UM_MISSIONARIO', () => {
         expect(margem.pode_executar_acao(acoes.UM_CANIBAL_UM_MISSIONARIO)).toBe(false);
     })
 })
+
+describe('Está vazia', () => {
+    it ('deve estar vazia se não houver canibal e missionario', () => {
+        const margem = new Margem({ canibais: 0, missionarios: 0 });
+
+        expect(margem.esta_vazia()).toBe(true);
+    })
+
+    it ('não estar vazia se não houver pelo menos 1 canibal', () => {
+        const margem = new Margem({ canibais: 1, missionarios: 0 });
+
+        expect(margem.esta_vazia()).toBe(false);
+    })
+
+    it ('não estar vazia se não houver pelo menos 1 missionarios', () => {
+        const margem = new Margem({ canibais: 0, missionarios: 1 });
+
+        expect(margem.esta_vazia()).toBe(false);
+    })
+})
+    

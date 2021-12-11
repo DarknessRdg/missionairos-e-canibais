@@ -39,6 +39,10 @@ class Margem {
 
         return missionarios_sobrevivem && !quantidade_negativa;
     }
+
+    esta_vazia() {
+        return this.canibais === 0 && this.missionarios === 0;
+    }
 };
 
 export default Margem;
