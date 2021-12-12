@@ -1,4 +1,5 @@
 import acoes from "../../src/constants/acoes";
+import atores from "../../src/constants/atores";
 import Margem from "../../src/jogo/margem";
 import Canoa from "../../src/jogo/Canoa";
 
@@ -345,5 +346,76 @@ describe('Executar ação', () => {
         margem.executar_acao(acoes.UM_CANIBAL);
 
         expect(margem.acao_executada).toBe(acoes.UM_CANIBAL);
+    })
+
+    it ('deve adicionar os atores da ação na canoa', () => {
+        const margem = new Margem({ 
+            canibais: 2, 
+            missionarios: 2, 
+            canoa: new Canoa()
+        });
+
+        margem.executar_acao(acoes.UM_CANIBAL_UM_MISSIONARIO);
+
+        expect(margem.canoa.passageiros)
+            .toStrictEqual(acoes.UM_CANIBAL_UM_MISSIONARIO.atores);
+    })
+})
+
+
+describe('Clone', () => {
+    it('deve retornar uma nova margem com os mesmos atributos preenchidos', () => {
+        const original = new Margem({ 
+            canibais: 2, 
+            missionarios: 3, 
+            canoa: new Canoa()
+        });
+        original.executar_acao(acoes.UM_CANIBAL);
+
+        const clone = original.clone();
+
+        expect(clone.canibais).toBe(original.canibais);
+        expect(clone.missionarios).toBe(original.missionarios);
+        expect(clone.acao_executada).toBe(acoes.UM_CANIBAL);
+    })
+
+    it('deve poder executar acoes sem afetar a margem original', () => {
+        const original = new Margem({ 
+            canibais: 2, 
+            missionarios: 3, 
+            canoa: new Canoa()
+        });
+
+        const clone = original.clone();
+        clone.executar_acao(acoes.UM_CANIBAL);
+
+        expect(clone.acao_executada).toBe(acoes.UM_CANIBAL);
+        expect(original.acao_executada).toBeNull();
+        expect(clone.canibais != original.canibais).toBe(true);
+        expect(clone.missionarios).toBe(original.missionarios);
+    })
+
+    it('deve criar um clone da cona', () => {
+        const original = new Margem({ 
+            canibais: 2, 
+            missionarios: 3, 
+            canoa: new Canoa()
+        });
+
+        const clone = original.clone();
+
+        expect(clone.canoa !== original.canoa).toBe(true);
+    })
+
+    it('deve continuar sem canoa, se a original não tiver', () => {
+        const original = new Margem({ 
+            canibais: 2, 
+            missionarios: 3, 
+            canoa: null
+        });
+
+        const clone = original.clone();
+
+        expect(clone.canoa).toBeNull();
     })
 })

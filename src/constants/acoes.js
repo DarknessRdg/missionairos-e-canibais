@@ -1,15 +1,18 @@
+import atores from "./atores";
+
 class Acao {
-    constructor(canibal, missionario) {
+    constructor(canibal, missionario, atores) {
         this.qnt_canibal = canibal;
         this.qnt_missioanario = missionario;
+        this.atores = atores;
     }
 }
 
 
 export default {
-    UM_CANIBAL: new Acao(1, 0),
-    UM_MISSIONARIO: new Acao(0, 1),
-    DOIS_CANIBAIS: new Acao(2, 0),
-    DOIS_MISSIONARIOS: new Acao(0, 2),
-    UM_CANIBAL_UM_MISSIONARIO: new Acao(1, 1)
+    UM_CANIBAL: new Acao(1, 0, [atores.CANIBAL]),
+    UM_MISSIONARIO: new Acao(0, 1, [atores.MISSIONARIO]),
+    DOIS_CANIBAIS: new Acao(2, 0, [atores.CANIBAL, atores.CANIBAL]),
+    DOIS_MISSIONARIOS: new Acao(0, 2, [atores.MISSIONARIO, atores.MISSIONARIO]),
+    UM_CANIBAL_UM_MISSIONARIO: new Acao(1, 1, [atores.MISSIONARIO, atores.CANIBAL])
 };

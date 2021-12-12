@@ -3,6 +3,6 @@ function CanoaCheiaException(passageiros) {
     this.name = 'CanoaCheiaException'
 }
 
-export default {
+export {
     CanoaCheiaException
 };
