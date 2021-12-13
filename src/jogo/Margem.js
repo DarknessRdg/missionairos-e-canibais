@@ -57,8 +57,7 @@ class Margem {
 
         let missionarios_sobrevivem = proximo_estado.missionarios >= proximo_estado.canibais;
 
-        // ação só move canibais e a margem não tem nenhum missionário para ser morto
-        if (!acao.atores.includes(atores.MISSIONARIO) && proximo_estado.missionarios === 0) {
+        if (proximo_estado.missionarios === 0) {
             missionarios_sobrevivem = true;
         }
 
