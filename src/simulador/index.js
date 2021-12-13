@@ -35,7 +35,7 @@ class Simulador {
      * e retornar os passos executados da primeira solução encontrada.
      * 
      * @param {Margem} inicio 
-     * @param {Marge} destino 
+     * @param {Margem} destino 
      * @returns {Array<PassoExecutado>}
      */
     _busca_em_largura(inicio, destino) {
