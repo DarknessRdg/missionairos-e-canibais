@@ -33,7 +33,6 @@ class Jogo {
             })
         });
 
-        let cont = 0;
         while (fila.length !== 0) {
             cont ++;
 
@@ -47,7 +46,6 @@ class Jogo {
             no.mover_canoa();
 
             if (no.esta_no_estado_esperado()) {
-                console.log(cont);
                 return no.passos_anteriores;
             }
 
