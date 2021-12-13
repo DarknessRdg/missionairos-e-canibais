@@ -47,6 +47,16 @@ describe('Pode executar ação: DOIS_CANIBAIS', () => {
         expect(margem.pode_executar_acao(acoes.DOIS_CANIBAIS)).toBe(true);
     })
 
+    it('deve poder executar DOIS_CANIBAIS, se a margem não tiver missionário', () => {
+        const margem = new Margem({
+            canibais: 3,
+            missionarios: 0,
+            canoa: new Canoa() 
+        })
+    
+        expect(margem.pode_executar_acao(acoes.DOIS_CANIBAIS)).toBe(true);
+    })
+
     it('pode executar quando o total restante for igual ao total de missionarios', () => {
         const margem = new Margem({ 
             canibais: 3, 
@@ -277,18 +287,6 @@ describe('Pode executar ação: UM_CANIBAL_UM_MISSIONARIO', () => {
     })
 })
 
-describe('Pode executar ação: NAO_EXISTE', () => {
-    it('não deve poder executar ação que não existe', () => {
-        const margem = new Margem({ 
-            canibais: 1, 
-            missionarios: 2, 
-            canoa: new Canoa() 
-        });
-
-        expect(margem.pode_executar_acao('NAO_EXISTE')).toBe(false);
-    })
-})
-
 describe('Está vazia', () => {
     it ('deve estar vazia se não houver canibal e missionario', () => {
         const margem = new Margem({ 
@@ -417,5 +415,17 @@ describe('Clone', () => {
         const clone = original.clone();
 
         expect(clone.canoa).toBeNull();
+    })
+})
+
+describe('Pode executar ação, sem canoa', () => {
+    it('deve poder executar DOIS_CANIBAIS, se a margem não tiver missionário', () => {
+        const margem = new Margem({
+            canibais: 0,
+            missionarios: 0,
+            canoa: null
+        })
+    
+        expect(margem.pode_executar_acao(acoes.DOIS_CANIBAIS)).toBe(true);
     })
 })
