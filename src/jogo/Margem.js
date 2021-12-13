@@ -1,4 +1,5 @@
 import acoes from '../constants/acoes';
+import atores from '../constants/atores';
 
 class Margem {
     constructor({ canibais, missionarios, canoa = null, de_inicio = false }) {
@@ -18,7 +19,7 @@ class Margem {
 
         outra.acao_executada = this.acao_executada;
 
-        if (this._canoa_esta_na_margem()) {
+        if (this.canoa_esta_na_margem()) {
             outra.canoa = this.canoa.clone();
         }
 
@@ -41,18 +42,33 @@ class Margem {
         this.missionarios = novo_estado.missionarios;
 
         
-        if (this._canoa_esta_na_margem()) {
+        if (this.canoa_esta_na_margem()) {
             acao.atores.forEach(ator => this.canoa.add_passageiro(ator));
         }
     }
 
+    /**
+     * Verifica se a ação vai deixar a margem com um estado
+     * válido, onde os missionários sobrevivem, e existem atores
+     * suficiente para mover de lado.
+     */
     pode_executar_acao(acao) {
         const proximo_estado = this._proximo_estado_dada_acao(acao);
 
-        const missionarios_sobrevivem = proximo_estado.missionarios >= proximo_estado.canibais;
+        let missionarios_sobrevivem = proximo_estado.missionarios >= proximo_estado.canibais;
+
+        // ação só move canibais e a margem não tem nenhum missionário para ser morto
+        if (!acao.atores.includes(atores.MISSIONARIO) && proximo_estado.missionarios === 0) {
+            missionarios_sobrevivem = true;
+        }
+
         const quantidade_negativa = proximo_estado.missionarios < 0 || proximo_estado.canibais < 0;
 
         return missionarios_sobrevivem && !quantidade_negativa;
+    }
+
+    missionarios_mortos() {
+        return this.missionarios < this.canibais;
     }
 
     _proximo_estado_dada_acao(acao) {
@@ -61,7 +77,7 @@ class Margem {
             missionarios: this.missionarios
         };
 
-        if (this._canoa_esta_na_margem()) {
+        if (this.canoa_esta_na_margem()) {
             proximo_estado.canibais -= acao.qnt_canibal;
             proximo_estado.missionarios -= acao.qnt_missioanario;
         } else {
@@ -72,7 +88,7 @@ class Margem {
         return proximo_estado;
     }
 
-    _canoa_esta_na_margem() { return this.canoa !== null; }
+    canoa_esta_na_margem() { return this.canoa !== null; }
 };
 
 export default Margem;
