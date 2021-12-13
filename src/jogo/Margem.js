@@ -1,5 +1,4 @@
 import acoes from '../constants/acoes';
-import atores from '../constants/atores';
 
 class Margem {
     constructor({ canibais, missionarios, canoa = null, de_inicio = false }) {

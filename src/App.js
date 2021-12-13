@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import Jogo from './jogo';
 
 function App() {
+  const j = new Jogo();
+  console.log(j.encontrar_acoes());
+
   return (
     <div className="App">
       <header className="App-header">

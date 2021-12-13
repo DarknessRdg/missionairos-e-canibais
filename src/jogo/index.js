@@ -34,7 +34,6 @@ class Jogo {
         });
 
         while (fila.length !== 0) {
-            cont ++;
 
             const no = fila.shift();
 

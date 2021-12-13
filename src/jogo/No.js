@@ -53,7 +53,7 @@ class No {
 
     possiveis_acoes() {
         return this.com_canoa().possiveis_acoes().filter((acao) => {
-            if (this.esta_voltando() && acao == this.acao) return false;    
+            if (this.esta_voltando() && acao === this.acao) return false;    
             return this.sem_canoa().pode_executar_acao(acao)
         });
     }
