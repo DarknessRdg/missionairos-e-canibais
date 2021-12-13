@@ -1,7 +1,7 @@
 import acoes from "../../src/constants/acoes";
-import Canoa from "../../src/jogo/Canoa";
-import No from "../../src/jogo/No";
-import Margem from "../../src/jogo/Margem";
+import Canoa from "../../src/simulador/Canoa";
+import No from "../../src/simulador/No";
+import Margem from "../../src/simulador/Margem";
 
 describe('Com canoa', () => {
     it('deve retorna a margem que possui canoa', () => {

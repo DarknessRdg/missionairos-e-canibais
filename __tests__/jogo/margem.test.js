@@ -1,7 +1,7 @@
 import acoes from "../../src/constants/acoes";
 import atores from "../../src/constants/atores";
-import Margem from "../../src/jogo/margem";
-import Canoa from "../../src/jogo/Canoa";
+import Margem from "../../src/simulador/margem";
+import Canoa from "../../src/simulador/Canoa";
 
 describe('Construtor', () => {
     it('deve inicializar as variaveis com os valores fornecidos', () => {

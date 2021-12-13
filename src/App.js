@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Jogo from './jogo';
+import Jogo from './simulador';
 
 function App() {
   const j = new Jogo();

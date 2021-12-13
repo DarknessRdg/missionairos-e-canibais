@@ -6,11 +6,7 @@ class No {
         this._margem_a = margem_a.clone();
         this._margem_b = margem_b.clone();
 
-        console.log('passos anteriores recebids', passos_anteriores)
-
         this.passos_anteriores = [...passos_anteriores];
-        console.log('passos anteriores recebids aft', this.passos_anteriores)
-
     }
 
     executar_acao() {
