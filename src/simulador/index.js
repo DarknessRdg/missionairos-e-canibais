@@ -2,13 +2,20 @@ import Canoa from "./Canoa";
 import Margem from "./Margem";
 import No from "./No";
 
-class Jogo {
-    constructor() {
-        this.ganhou = false;
-        this.passos_executados = []
-    }
+/**
+ * Classe que irá simular o problema dos missionários e canibais
+ * e encontrar a sequência de passos corretos com a solução
+ * do problema através de uma busca em largura
+ */
+class Simulador {
 
-    encontrar_acoes() {
+    /**
+     * Método púlico que irá buscar a sequência de passos com a solução
+     * do problema.
+     * 
+     * @returns {Array<PassoExecutado>}
+     */
+    encontrar_passos() {
         // margem da direita
         const margem_saida = new Margem({ 
             canibais: 3, 
@@ -23,6 +30,14 @@ class Jogo {
         return this._busca_em_largura(margem_saida, margem_destino);
     }
 
+    /**
+     * Método privado para realizar busca em largura nas possíveis ações
+     * e retornar os passos executados da primeira solução encontrada.
+     * 
+     * @param {Margem} inicio 
+     * @param {Marge} destino 
+     * @returns {Array<PassoExecutado>}
+     */
     _busca_em_largura(inicio, destino) {
         const fila = inicio.possiveis_acoes().map((acao) => {
             return new No({
@@ -70,4 +85,4 @@ class PassoExecutado {
 }
 
 
-export default Jogo;
+export default Simulador;
