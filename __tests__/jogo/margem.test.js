@@ -120,14 +120,14 @@ describe('Pode executar ação: DOIS_MISSIONARIOS', () => {
         expect(margem.pode_executar_acao(acoes.DOIS_MISSIONARIOS)).toBe(true);
     })
 
-    it ('não pode executar quando sobrar menos missionários do que canibais', () => {
+    it ('pode executar quando sobrar a quantidade de missionarios restante for 0', () => {
         const margem = new Margem({ 
             canibais: 1,
             missionarios: 2, 
             canoa: new Canoa() 
         });
 
-        expect(margem.pode_executar_acao(acoes.DOIS_MISSIONARIOS)).toBe(false);
+        expect(margem.pode_executar_acao(acoes.DOIS_MISSIONARIOS)).toBe(true);
     })
 
     it ('não pode executar so existe 1 missionário na margem', () => {
@@ -214,16 +214,6 @@ describe('Pode executar ação: UM_MISSIONARIO', () => {
         expect(margem.pode_executar_acao(acoes.UM_MISSIONARIO)).toBe(true);
     })
 
-    it('não pode executar quando o total restante for menor do que total de canibais', () => { 
-        const margem = new Margem({ 
-            canibais: 1, 
-            missionarios: 1, 
-            canoa: new Canoa() 
-        });
-
-        expect(margem.pode_executar_acao(acoes.UM_MISSIONARIO)).toBe(false);
-    })
-
     it('não pode executar não existe missionário', () => {
         const margem = new Margem({ 
             canibais: 2 , 
@@ -258,12 +248,22 @@ describe('Pode executar ação: UM_CANIBAL_UM_MISSIONARIO', () => {
 
     it('não pode executar quando o total de missionário menor do que canibal', () => { 
         const margem = new Margem({ 
+            canibais: 3, 
+            missionarios: 2, 
+            canoa: new Canoa() 
+        });
+
+        expect(margem.pode_executar_acao(acoes.UM_CANIBAL_UM_MISSIONARIO)).toBe(false);
+    })
+
+    it('pode executar quando o total de missionarios restante for 0', () => {
+        const margem = new Margem({ 
             canibais: 2, 
             missionarios: 1, 
             canoa: new Canoa() 
         });
 
-        expect(margem.pode_executar_acao(acoes.UM_CANIBAL_UM_MISSIONARIO)).toBe(false);
+        expect(margem.pode_executar_acao(acoes.UM_CANIBAL_UM_MISSIONARIO)).toBe(true);
     })
 
     it('não pode executar quando não tiver missionário', () => { 
@@ -428,4 +428,15 @@ describe('Pode executar ação, sem canoa', () => {
     
         expect(margem.pode_executar_acao(acoes.DOIS_CANIBAIS)).toBe(true);
     })
+})
+
+
+it('pode enviar 2 missionarios, se quantidade não sobrar missionarios', () => {
+    const margem = new Margem({
+        canibais: 2,
+        missionarios: 2,
+        canoa: new Canoa()
+    })
+
+    expect(margem.possiveis_acoes()).toContain(acoes.DOIS_MISSIONARIOS);
 })
