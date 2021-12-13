@@ -1,9 +1,33 @@
+import Canoa from "./Canoa";
+
 class No {
-    constructor({ acao, margem_a, margem_b, passos_anteriores = [] }) {
+    constructor({ acao, margem_a, margem_b, passos_anteriores }) {
         this.acao = acao;
         this._margem_a = margem_a.clone();
         this._margem_b = margem_b.clone();
+
+        console.log('passos anteriores recebids', passos_anteriores)
+
         this.passos_anteriores = [...passos_anteriores];
+        console.log('passos anteriores recebids aft', this.passos_anteriores)
+
+    }
+
+    executar_acao() {
+        this._margem_a.executar_acao(this.acao);
+        this._margem_b.executar_acao(this.acao);
+    }
+
+    esta_no_estado_esperado() {
+        return this.margem_de_inicio().esta_vazia();
+    }
+
+    mover_canoa() {
+        const _com_canoa = this.com_canoa();
+        const _sem_canoa = this.sem_canoa();
+
+        _com_canoa.canoa = null;
+        _sem_canoa.canoa = new Canoa();
     }
 
     com_canoa() { 
@@ -29,8 +53,22 @@ class No {
 
     possiveis_acoes() {
         return this.com_canoa().possiveis_acoes().filter((acao) => {
+            if (this.esta_voltando() && acao == this.acao) return false;    
             return this.sem_canoa().pode_executar_acao(acao)
         });
+    }
+
+    adjacentes() {
+        return this.possiveis_acoes().map(acao => new No({
+            acao: acao,
+            margem_a: this._margem_a,
+            margem_b: this._margem_b,
+            passos_anteriores: this.passos_anteriores
+        }));
+    }
+
+    esta_voltando() {
+        return this.sem_canoa() === this.margem_de_inicio();
     }
 }
 
