@@ -1,0 +1,33 @@
+.canoa-content {
+    position: relative;
+    
+}
+
+.canoa-content > .canoa {
+    background-color: red;
+    display: flex;
+
+    background-image: url('../../../assets/canoa.jpg');
+    background-size: cover;
+    background-position: center;
+
+    padding-bottom: 20%;
+    padding-top: 50%;
+
+    margin-bottom: 50px;
+    position: absolute;
+    bottom: 0;
+}
+
+
+.canoa-content > .canoa.direita {
+    left: 0;
+
+    transition: all 10s;
+}
+
+.canoa-content > .canoa.esquerda {
+    right: 0;
+
+    transition: all 10s;
+}
