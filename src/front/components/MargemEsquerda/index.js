@@ -4,7 +4,7 @@ import ContainerPersonagem from "../ContainerPersonagens";
 import Peronagem from "../Personagem";
 import "./style.css"
 
-function MargemEsquerda() {
+function MargemEsquerda({ mudar_de_lado, lado_atual }) {
     const [canibais, set_canibais] = useState(
         []
     );
@@ -18,11 +18,10 @@ function MargemEsquerda() {
 
     return <div className="margem-esquerda">
         <ContainerPersonagem
-            personagens={build_personagem_component(canibais)}
-        />
+            personagens={build_personagem_component(canibais)} />
+
         <ContainerPersonagem
-            personagens={build_personagem_component(missionarios)}
-        />
+            personagens={build_personagem_component(missionarios)} />
     </div>
 };
 

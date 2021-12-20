@@ -1,10 +1,8 @@
 .canoa-content {
     position: relative;
-    
 }
 
 .canoa-content > .canoa {
-    background-color: red;
     display: flex;
 
     background-image: url('../../../assets/canoa.jpg');
@@ -15,19 +13,48 @@
     padding-top: 50%;
 
     margin-bottom: 50px;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
+
+    min-height: 28vh;
+    min-width: 16vw;
 }
 
 
 .canoa-content > .canoa.direita {
-    left: 0;
-
-    transition: all 10s;
+    /* left: 35vh;    */
+    transform: translateX(40vh);
+    /* transition: all 20s linear; */
 }
 
 .canoa-content > .canoa.esquerda {
-    right: 0;
+    /* right: -35vh; */
+    /* transition: all 20s linear; */
+    transform: translateX(30vh);
+    animation: direita-para-esquerda 5s forwards;
+}
 
-    transition: all 10s;
+
+.canoa-content > .canoa.direita {
+    /* right: -35vh; */
+    /* transition: all 20s linear; */
+    
+    transform: translateX(50vh);
+}
+
+
+/* 
+ * transform : translanteX(value)
+ * value: ao aumentar, move para direita
+ *        ao diminuir, move para esquerda
+ */
+
+@keyframes direita-para-esquerda {
+    0% {
+        transform: translateX(50vh);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }

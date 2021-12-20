@@ -4,7 +4,7 @@ import Atores from "../../../constants/atores";
 import "./style.css";
 
 
-function Peronagem({ id, lado, tipo }) {
+function Peronagem({ tipo }) {
     const img_src = get_src(tipo);
 
     return <img

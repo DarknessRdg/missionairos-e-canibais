@@ -47,6 +47,13 @@ class No {
         return this._margem_b;
     }
 
+    margem_de_destino() {
+        if (!this._margem_a.de_inicio) {
+            return this._margem_a;
+        }
+        return this._margem_b;
+    }
+
     possiveis_acoes() {
         return this.com_canoa().possiveis_acoes().filter((acao) => {
             if (this.esta_voltando() && acao === this.acao) return false;    

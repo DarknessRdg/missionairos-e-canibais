@@ -78,8 +78,8 @@ class Simulador {
  */
 class PassoExecutado {
     constructor(no) {
-        this.estado_da_margem_com_canoa = no.com_canoa().clone();
-        this.estado_da_margem_sem_canoa = no.sem_canoa().clone();
+        this.estado_da_margem_inicial = no.margem_de_inicio().clone();
+        this.estado_da_margem_destino = no.margem_de_destino().clone();
         this.acao_executada = no.acao;
     }
 }
