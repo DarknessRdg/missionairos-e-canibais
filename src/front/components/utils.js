@@ -1,4 +1,5 @@
 import Atores from "../../constants/atores";
+import Personagem from "../components/Personagem";
 
 
 function get_canibais_pelo_estado(estado) {
@@ -17,8 +18,13 @@ function get_missionarios_pelo_estado(estado) {
     return atores;
 }
 
+function build_personagem_component(personagens) {
+    return personagens.map(tipo => <Personagem tipo={tipo} />)
+}
+
 
 export default {
     get_canibais_pelo_estado,
-    get_missionarios_pelo_estado
+    get_missionarios_pelo_estado,
+    build_personagem_component
 };

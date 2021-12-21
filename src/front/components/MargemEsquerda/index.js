@@ -1,27 +1,27 @@
-import { useState } from "react";
-import Atores from "../../../constants/atores";
 import ContainerPersonagem from "../ContainerPersonagens";
-import Peronagem from "../Personagem";
 import "./style.css"
+import utils from "../utils";
+import FINALIZADOR from "../finalizador";
+import { useEffect, useState } from "react";
 
-function MargemEsquerda({ mudar_de_lado, lado_atual }) {
-    const [canibais, set_canibais] = useState(
-        []
-    );
-    const [missionarios, set_missionarios] = useState(
-        []
-    );
+function MargemEsquerda({ ao_finalizar, estado_atual, em_execucao }) {
+    const [canibais, set_canibais] = useState([]);
+    const [missionarios, set_missionarios] = useState([]);
+    const [_em_exec, set_em_exec] = useState(em_execucao);    
 
-    function build_personagem_component(personagens) {
-        return personagens.map(tipo => <Peronagem id='1' lado='ESQUERDO' tipo={tipo} />)
-    }
+    useEffect(function atualiazr_atores() {
+        if (em_execucao === FINALIZADOR.MARGEM_ESQUERDA) {
+            set_canibais(utils.get_canibais_pelo_estado(estado_atual));
+            set_missionarios(utils.get_missionarios_pelo_estado(estado_atual));
+        }
+    }, [em_execucao]);
 
     return <div className="margem-esquerda">
         <ContainerPersonagem
-            personagens={build_personagem_component(canibais)} />
+            personagens={utils.build_personagem_component(canibais)} />
 
         <ContainerPersonagem
-            personagens={build_personagem_component(missionarios)} />
+            personagens={utils.build_personagem_component(missionarios)} />
     </div>
 };
 

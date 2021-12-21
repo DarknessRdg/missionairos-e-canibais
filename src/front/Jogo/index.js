@@ -1,6 +1,7 @@
 import { useState } from "react";
 import posicao from "../../constants/posicao";
 import Canoa from "../components/Canoa";
+import FINALIZADOR from "../components/finalizador";
 import MargemDireita from "../components/MargemDireita";
 import MargemEsquerda from "../components/MargemEsquerda";
 import "./style.css";
@@ -10,22 +11,19 @@ function Jogo({ passos_executados }) {
     let passo_id = 0;
 
     const [passo, set_passo] = useState(passos_executados[passo_id]);
-    const [lado, set_lado] = useState(posicao.DIREITA);
-    const [mover_canoa, set_mover_canoa] = useState(false);
+    const [executando_animacao, set_executando_animaca] = useState(FINALIZADOR.MARGEM_DIREITA);
 
-    function mudar_de_lado() {
-        if (lado === posicao.ESQUERDA) {
-            set_passo(proximo_passo());
+    function ao_finalizar_animacao() {
+        if (executando_animacao === FINALIZADOR.MARGEM_DIREITA) {
+            set_executando_animaca(FINALIZADOR.CANOA);
+        } else if (executando_animacao === FINALIZADOR.CANOA) {
+            set_executando_animaca(FINALIZADOR.MARGEM_ESQUERDA);
         }
-
-        set_lado(novo_lado());
-    }
-
-    function novo_lado() {
-        if (lado === posicao.DIREITA) {
-            return posicao.ESQUERDA;
-        }
-        return posicao.DIREITA;
+            // margem esquerda
+            // se esquerda  
+            //     mudar lado da canoa
+            //     mudar quem esta executando animacao
+        
     }
 
     function proximo_passo() {
@@ -37,19 +35,20 @@ function Jogo({ passos_executados }) {
         <div className="wrapper">
             <MargemEsquerda 
                 acao={passo.acao_executada}
-                ao_finalizar={mudar_de_lado} 
-                lado_atual={lado} />
+                ao_finalizar={ao_finalizar_animacao} 
+                em_execucao={executando_animacao}
+                estado_atual={passo.estado_da_margem_destino} />
 
             <Canoa 
                 acao={passo.acao_executada} 
-                posicao_ataual={lado} 
-                ao_finalizar={mudar_de_lado} />
+                em_execucao={executando_animacao}
+                ao_finalizar={ao_finalizar_animacao}
+                esta_voltando={passo.canoa_esta_voltando} />
 
             <MargemDireita 
                 acao={passo.acao_executada}
-                ao_finalizar={mudar_de_lado} 
-                lado_atual={lado} 
-                mover_canoa={mover_canoa}
+                ao_finalizar={ao_finalizar_animacao} 
+                em_execucao={executando_animacao}
                 estado_atual={passo.estado_da_margem_inicial} />
         </div>
     </div>

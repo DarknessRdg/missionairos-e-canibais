@@ -3,12 +3,12 @@ import posicao from '../../../constants/posicao';
 import "./style.css";
 import { useState } from 'react';
 import Atores from '../../../constants/atores';
+import FINALIZADOR from '../finalizador';
 
 
 function build_passageiros(acao) {
     const passageiros = [];
 
-    console.log(acao)
     for (let _ = 0; _ < acao.qnt_missioanario; _++) {
         passageiros.push(Atores.MISSIONARIO);
     }
@@ -20,13 +20,22 @@ function build_passageiros(acao) {
 };
 
 
-function Canoa({ posicao_ataual = posicao.DIREITA, acao }) {
+function Canoa({ em_execucao, acao, ao_finalizar, esta_voltando }) {
     const [passageiros, set_passageiros] = useState(
         build_passageiros(acao)
     );
 
+    if (em_execucao === FINALIZADOR.CANOA) {
+        setTimeout(ao_finalizar, 5000);
+    }
+
+    let direcao_da_canoa = 'esquerda';
+    if (esta_voltando) {
+        direcao_da_canoa = 'direita';
+    }
+
     return <div className="canoa-content">
-        <div className={"canoa " + posicao_ataual}>
+        <div className={"canoa " + direcao_da_canoa}>
             {passageiros.map(it => <Peronagem tipo={it} />)}
         </div>
     </div>

@@ -1,30 +1,23 @@
-import posicao from "../../../constants/posicao";
 import ContainerPersonagem from "../ContainerPersonagens";
-import Peronagem from "../Personagem";
 import "./style.css"
 import utils from '../utils';
+import FINALIZADOR from "../finalizador";
 
 
-function build_personagem_component(personagens) {
-    return personagens.map(tipo => <Peronagem id='1' lado='DIREITO' tipo={tipo} />)
-}
-
-
-function MargemDireita({ ao_finalizar, lado_atual, estado_atual }) {
+function MargemDireita({ ao_finalizar, em_execucao, estado_atual }) {
     const canibais = utils.get_canibais_pelo_estado(estado_atual);
-
     const missionarios = utils.get_missionarios_pelo_estado(estado_atual);
  
-    if (lado_atual === posicao.DIREITA) {
+    if (em_execucao === FINALIZADOR.MARGEM_DIREITA) {
         setTimeout(ao_finalizar, 2000);
     }
 
     return <div className="margem-direita">
         <ContainerPersonagem
-            personagens={build_personagem_component(canibais)}
+            personagens={utils.build_personagem_component(canibais)}
         />
         <ContainerPersonagem
-            personagens={build_personagem_component(missionarios)}
+            personagens={utils.build_personagem_component(missionarios)}
         />
     </div>
 };

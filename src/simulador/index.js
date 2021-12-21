@@ -81,6 +81,7 @@ class PassoExecutado {
         this.estado_da_margem_inicial = no.margem_de_inicio().clone();
         this.estado_da_margem_destino = no.margem_de_destino().clone();
         this.acao_executada = no.acao;
+        this.canoa_esta_voltando = no.esta_voltando();
     }
 }
 

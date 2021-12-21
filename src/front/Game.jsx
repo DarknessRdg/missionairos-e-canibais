@@ -146,27 +146,27 @@ export default class Game extends Component {
     }
 
     for (let i = 0; i < qnt_canibal; i++) {
-      // const canibal = document.querySelector(`[lado="${lado}"].canibal`);
-      // canibal.setAttribute("lado", this.state.lado === 0 ? "esquerda" : "direita");
-      // this.state.sendoLevados.push(canibal.id)
-      // this.trocarLugar(canibal, saida);
-      // console.log(canibal)
+      const canibal = document.querySelector(`[lado="${lado}"].canibal`);
+      canibal.setAttribute("lado", this.state.lado === 0 ? "esquerda" : "direita");
+      this.state.sendoLevados.push(canibal.id)
+      this.trocarLugar(canibal, saida);
+      console.log(canibal)
 
-      // if (this.state.lado === 0) {
-      //   canibal.style.bottom = `${
-      //     this.state.lugares.lugarNaCanoaDireita[this.state.lugar][0]
-      //   }rem`;
-      //   canibal.style.right = `${
-      //     this.state.lugares.lugarNaCanoaDireita[this.state.lugar][1]
-      //   }rem`;
-      // } else {
-      //   canibal.style.bottom = `${
-      //     this.state.lugares.lugarNaCanoaEsquerda[this.state.lugar][0]
-      //   }rem`;
-      //   canibal.style.right = `${
-      //     this.state.lugares.lugarNaCanoaEsquerda[this.state.lugar][1]
-      //   }rem`;
-      // }
+      if (this.state.lado === 0) {
+        canibal.style.bottom = `${
+          this.state.lugares.lugarNaCanoaDireita[this.state.lugar][0]
+        }rem`;
+        canibal.style.right = `${
+          this.state.lugares.lugarNaCanoaDireita[this.state.lugar][1]
+        }rem`;
+      } else {
+        canibal.style.bottom = `${
+          this.state.lugares.lugarNaCanoaEsquerda[this.state.lugar][0]
+        }rem`;
+        canibal.style.right = `${
+          this.state.lugares.lugarNaCanoaEsquerda[this.state.lugar][1]
+        }rem`;
+      }
       // this.state.lugar = 1;
     }
 
