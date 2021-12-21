@@ -4,7 +4,7 @@ import Atores from "../../../constants/atores";
 import "./style.css";
 
 
-function Peronagem({ tipo }) {
+function Personagem({ tipo }) {
     const img_src = get_src(tipo);
 
     return <img
@@ -21,4 +21,4 @@ function get_src(tipo) {
 }
 
 
-export default Peronagem;
+export default Personagem;
