@@ -11,6 +11,14 @@ function Home() {
     function simular_jogo() {
         const simulador = new Simulador();
         const passos = simulador.encontrar_passos();
+
+        let id = 1
+        passos.forEach(p => {
+            p.id = id;
+            id += 10; 
+        })
+        
+        
         set_passo_executados([...passos]);
         set_tem_passos(true);
         console.log(passos);

@@ -3,11 +3,15 @@ import "./style.css"
 import utils from "../utils";
 import FINALIZADOR from "../finalizador";
 import { useEffect, useState } from "react";
+import configs from "../configs";
 
 function MargemEsquerda({ ao_finalizar, estado_atual, em_execucao }) {
     const [canibais, set_canibais] = useState([]);
     const [missionarios, set_missionarios] = useState([]);
-    const [_em_exec, set_em_exec] = useState(em_execucao);    
+
+    if (em_execucao === FINALIZADOR.MARGEM_ESQUERDA) {
+        setTimeout(ao_finalizar, configs.delay_animacao_em_ms);
+    }
 
     useEffect(function atualiazr_atores() {
         if (em_execucao === FINALIZADOR.MARGEM_ESQUERDA) {
