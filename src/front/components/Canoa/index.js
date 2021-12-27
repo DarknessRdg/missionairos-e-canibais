@@ -1,13 +1,13 @@
-import Peronagem from '../Personagem';
-import posicao from '../../../constants/posicao';
 import "./style.css";
 import { useEffect, useState } from 'react';
 import Atores from '../../../constants/atores';
 import FINALIZADOR from '../finalizador';
+import utils from '../utils';
+import configs from "../configs";
 
 
 function build_passageiros(acao) {
-    const passageiros = [];
+    const passageiros = []
 
     for (let _ = 0; _ < acao.qnt_missioanario; _++) {
         passageiros.push(Atores.MISSIONARIO);
@@ -21,14 +21,12 @@ function build_passageiros(acao) {
 
 
 function Canoa({ em_execucao, acao, ao_finalizar, esta_voltando }) {
-    const [passageiros, set_passageiros] = useState(
-        build_passageiros(acao)
-    );
+    const [passageiros, set_passageiros] = useState([]);
 
     const esta_indo = !esta_voltando;
 
     if (em_execucao === FINALIZADOR.CANOA) {
-        setTimeout(ao_finalizar, 5100);
+        setTimeout(ao_finalizar, configs.delay_animacao_em_ms);
     }
 
     let direcao_da_canoa = 'esquerda';
@@ -41,12 +39,14 @@ function Canoa({ em_execucao, acao, ao_finalizar, esta_voltando }) {
             set_passageiros([])
         } else if (esta_voltando && em_execucao === FINALIZADOR.MARGEM_DIREITA) {
             set_passageiros([])
+        } else {
+            set_passageiros(build_passageiros(acao));
         }
     }, [em_execucao])
 
     return <div className="canoa-content">
         <div className={"canoa " + direcao_da_canoa}>
-            {passageiros.map(it => <Peronagem tipo={it} />)}
+            {utils.build_personagem_component(passageiros)}
         </div>
     </div>
 }

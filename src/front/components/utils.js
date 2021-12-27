@@ -19,7 +19,7 @@ function get_missionarios_pelo_estado(estado) {
 }
 
 function build_personagem_component(personagens) {
-    return personagens.map(tipo => <Personagem tipo={tipo} />)
+    return personagens.map((tipo, index) => <Personagem key={index} tipo={tipo} />)
 }
 
 

@@ -19,20 +19,12 @@
     min-width: 16vw;
 }
 
-
 .canoa-content > .canoa.direita {
-    transform: translateX(40vh);
+    animation: direita-para-esquerda 2s forwards;
 }
 
 .canoa-content > .canoa.esquerda {
-    transform: translateX(50vh);
-    animation: direita-para-esquerda 5s forwards;
-    animation-delay: 5s;
-}
-
-
-.canoa-content > .canoa.direita {
-    transform: translateX(50vh);
+    animation: esquerda-para-direita 2s forwards;
 }
 
 
@@ -42,12 +34,23 @@
  *        ao diminuir, move para esquerda
  */
 
-@keyframes direita-para-esquerda {
+ @keyframes direita-para-esquerda {
     0% {
-        transform: translateX(50vh);
+        transform: translateX(30vw);
     }
 
     100% {
         transform: translateX(0);
+    }
+}
+
+
+@keyframes esquerda-para-direita {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(30vw);
     }
 }
