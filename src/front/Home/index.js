@@ -35,7 +35,6 @@ function Home() {
         set_passo_executados(parse(passos));
 
         set_tem_passos(true);
-        console.log(estados_do_jogo);
     }
 
     return (

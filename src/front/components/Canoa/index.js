@@ -3,30 +3,39 @@ import { useEffect, useState } from 'react';
 import Atores from '../../../constants/atores';
 import utils from '../utils';
 
-function build_passageiros(acao) {
-    console.log(acao)
-    const passageiros = []
-
-    for (let _ = 0; _ < acao.missionarios; _++) {
-        passageiros.push(Atores.MISSIONARIO);
-    }
-    for (let _ = 0; _ < acao.canibais; _++) {
-        passageiros.push(Atores.CANIBAL);
-    }
-
-    return passageiros;
+/**
+ * Cria um array com o tipo dos pernosagens que estão
+ * na canoa a partir do estado atual
+ * @param {Object<canibais, missionarios>} estado 
+ * @returns {Array<Stri ng>}
+ */
+function build_passageiros(estado) {
+    return [
+        ...utils.get_canibais_pelo_estado(estado),
+        ...utils.get_missionarios_pelo_estado(estado)
+    ];
 };
 
 
 function Canoa({ estado_atual }) {
     const passageiros = build_passageiros(estado_atual);
-    const [esta_voltando, set_esta_voltando] = useState(false   );
+    const [esta_voltando, set_esta_voltando] = useState(false);
 
-    useEffect(() => {
+    /**
+     * Altera a direção da canoa se necessário
+     */
+    function alterar_direcao_da_canoa(){
         if (passageiros.length !== 0) {
             set_esta_voltando(!esta_voltando);
         }
-    }, [estado_atual]);
+
+    }
+
+    /**
+     * Altera o estado direção da canoa, se necessário
+     * sempre que o estado atual da canoa for alterado
+     */
+    useEffect(alterar_direcao_da_canoa, [estado_atual]);
 
     let direcao_da_canoa = 'esquerda';
     if (esta_voltando) {
