@@ -36,21 +36,21 @@
 
  @keyframes direita-para-esquerda {
     0% {
-        transform: translateX(30vw);
+        transform: translateX(15vw);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(-5vw);
     }
 }
 
 
 @keyframes esquerda-para-direita {
     0% {
-        transform: translateX(0);
+        transform: translateX(-5vw);
     }
 
     100% {
-        transform: translateX(30vw);
+        transform: translateX(15vw);
     }
 }

@@ -71,8 +71,8 @@ class Simulador {
 /**
  * Classe para manter o registro de passos executados até chegar
  * a um determinado nó do grafo. O registro mantém o estado:
- *   - margem com canoa
- *   - margem sem canoa
+ *   - margem de inicio
+ *   - margem de destino
  *   - qual margem é a margem de início do jogo
  *   - qual a ação executa.
  */
@@ -83,7 +83,30 @@ class PassoExecutado {
         this.acao_executada = no.acao;
         this.canoa_esta_voltando = no.esta_voltando();
     }
+
+    /**
+     * Retorna a margem no qual possui uma canoa
+     * @returns {Margem}
+     */
+    margem_com_canoa() {
+        if (this.estado_da_margem_inicial.canoa_esta_na_margem()) {
+            return this.estado_da_margem_inicial
+        }
+        return this.estado_da_margem_destino;
+    }
+
+    /**
+     * Retorna a margem no qual não existe canoa presente na margem
+     * @returns {Margem}
+     */
+    margem_sem_canoa() {
+        if (!this.estado_da_margem_inicial.canoa_esta_na_margem()) {
+            return this.estado_da_margem_inicial
+        }
+        return this.estado_da_margem_destino;
+    }
 }
+
 
 
 export default Simulador;

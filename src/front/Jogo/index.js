@@ -1,66 +1,60 @@
-import { useState } from "react";
-import posicao from "../../constants/posicao";
+import { useEffect, useState } from "react";
 import Canoa from "../components/Canoa";
-import FINALIZADOR from "../components/finalizador";
+import configs from "../components/configs";
 import MargemDireita from "../components/MargemDireita";
 import MargemEsquerda from "../components/MargemEsquerda";
 import "./style.css";
 
 
-function Jogo({ passos_executados }) {
+function Jogo({ estados_do_jogo }) {
     const [passo_id, set_passo_id] = useState(0);
 
-    const [executando_animacao, set_executando_animacao] = useState(FINALIZADOR.MARGEM_DIREITA);
+    /**
+     * Condição de parada do jogo, retorna booleano indicando
+     * se ainda existe passo para ser executado dentro do jogo
+     * @returns {Boolean}
+     */
+    function ainda_tem_passos_para_executar() {
+        return passo_id < estados_do_jogo.length-1;
+    }
 
-    function ao_finalizar_animacao() {
-        if (executando_animacao === FINALIZADOR.MARGEM_DIREITA) {
-            set_executando_animacao(FINALIZADOR.CANOA);
-        } else if (executando_animacao === FINALIZADOR.CANOA) {
-            if (get_passo_atual().esta_voltando) {
-                set_executando_animacao(FINALIZADOR.MARGEM_DIREITA);
-            } else {
-                set_executando_animacao(FINALIZADOR.MARGEM_ESQUERDA);
-            }
-        } else {
-            set_executando_animacao(FINALIZADOR.CANOA);
-            set_passo_id(passo_id + 1);
-            console.log('proximo passo', passo_id)
+    /**
+     * Função que irá inserir na fila de excução o próximo
+     * passo assim que a animação finalizar se ainda houver
+     * estados para serem executados.
+     */
+    function trigger_proximo_passo() {
+        if (ainda_tem_passos_para_executar()) {
+            setTimeout(
+                () => set_passo_id(passo_id + 1), 
+                configs.delay_animacao_em_ms
+            );
         }
     }
 
-    function get_estado_anterior() {
-        if (passo_id === 0) {
-            return passos_executados[0];
-        }
+    // quando a variavel passo_id mudar de valor, então irá
+    // executar a função que após a animação alterará novamente 
+    // para o próximo passo
+    useEffect(trigger_proximo_passo, [passo_id]);
 
-        return passos_executados[passo_id-1];
-    }
-
-    function get_passo_atual() {
-        return passos_executados[passo_id];
+    /**
+     * Retorna o estado do jogo atual
+     * @returns {EstadoDoJogo}
+     */
+    function get_estado_atual() {
+        return estados_do_jogo[passo_id];
     }
 
     return <div className="jogo">
         <div className="wrapper">
             <MargemEsquerda
-                acao={get_passo_atual().acao_executada}
-                ao_finalizar={ao_finalizar_animacao} 
-                em_execucao={executando_animacao}
-                estado_atual={get_passo_atual().estado_da_margem_destino}
-                estado_anterior={get_estado_anterior().estado_da_margem_destino} />
+                estado_atual={get_estado_atual().destino} />
 
             <Canoa
-                acao={get_passo_atual().acao_executada} 
-                em_execucao={executando_animacao}
-                ao_finalizar={ao_finalizar_animacao}
-                esta_voltando={get_passo_atual().canoa_esta_voltando} />
+                estado_atual={get_estado_atual().canoa}  />
 
             <MargemDireita
-                acao={get_passo_atual().acao_executada}
-                ao_finalizar={ao_finalizar_animacao} 
-                em_execucao={executando_animacao}
-                estado_atual={get_passo_atual().estado_da_margem_inicial}
-                estado_anterior={get_estado_anterior().estado_da_margem_inicial} />
+                estado_atual={get_estado_atual().inicio} />
         </div>
     </div>
 };

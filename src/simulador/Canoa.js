@@ -45,6 +45,13 @@ class Canoa {
         return this.passageiros.length < this.max_qnt_passageiros;
     }
 
+
+    /**
+     * Remove todos os atores da canoa
+     */
+    esvaziar() {
+        this.passageiros = [];
+    }
 }
 
 
