@@ -1,3 +1,11 @@
+/**
+ * Author: Luan da Silva Rodrigues
+ *         Leonardo Coelho de Sousa Pinheiro
+ * 
+ * Matéria: Inteligência Artifial
+ * Professora: Lianna Duarte
+ */
+
 import { useState } from 'react';
 import Simulador from '../../simulador';
 import Jogo from '../Jogo';

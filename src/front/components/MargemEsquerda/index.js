@@ -1,3 +1,11 @@
+/**
+ * Author: Luan da Silva Rodrigues
+ *         Leonardo Coelho de Sousa Pinheiro
+ * 
+ * Matéria: Inteligência Artifial
+ * Professora: Lianna Duarte
+ */
+
 import ContainerPersonagem from "../ContainerPersonagens";
 import "./style.css"
 import utils from "../utils";

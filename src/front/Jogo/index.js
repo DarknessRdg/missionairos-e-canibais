@@ -1,3 +1,11 @@
+/**
+ * Author: Luan da Silva Rodrigues
+ *         Leonardo Coelho de Sousa Pinheiro
+ * 
+ * Matéria: Inteligência Artifial
+ * Professora: Lianna Duarte
+ */
+
 import { useEffect, useState } from "react";
 import Canoa from "../components/Canoa";
 import configs from "../components/configs";

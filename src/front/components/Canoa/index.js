@@ -1,6 +1,13 @@
+/**
+ * Author: Luan da Silva Rodrigues
+ *         Leonardo Coelho de Sousa Pinheiro
+ * 
+ * Matéria: Inteligência Artifial
+ * Professora: Lianna Duarte
+ */
+
 import "./style.css";
 import { useEffect, useState } from 'react';
-import Atores from '../../../constants/atores';
 import utils from '../utils';
 
 /**

@@ -1,5 +1,12 @@
+/**
+ * Author: Luan da Silva Rodrigues
+ *         Leonardo Coelho de Sousa Pinheiro
+ * 
+ * Matéria: Inteligência Artifial
+ * Professora: Lianna Duarte
+ */
+
 import acoes from "../../src/constants/acoes";
-import atores from "../../src/constants/atores";
 import Margem from "../../src/simulador/margem";
 import Canoa from "../../src/simulador/Canoa";
 
